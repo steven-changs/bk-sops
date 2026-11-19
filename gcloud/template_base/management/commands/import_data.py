@@ -87,7 +87,7 @@ def do_import(
 
     logger.info("[import] start to import templates")
     import_result: typing.Dict[str, typing.Any] = template_model_cls.objects.import_templates(
-        template_data=template_data, override=False, operator="admin", **extra_params
+        template_data=template_data, override=False, operator=settings.SYSTEM_USE_API_ACCOUNT, **extra_params
     )
 
     if not import_result["result"]:

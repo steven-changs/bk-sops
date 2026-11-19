@@ -369,7 +369,7 @@ BK_PAAS_INNER_HOST = env.BK_PAAS_INNER_HOST
 IS_AJAX_PLAIN_MODE = True
 
 # init admin list
-INIT_SUPERUSER = ["admin"]
+INIT_SUPERUSER = [env.BK_ADMIN_USERNAME]
 
 # cc、job、iam、 nodeman域名
 BK_CC_HOST = env.BK_CC_HOST
@@ -396,6 +396,9 @@ BK_IAM_SAAS_HOST = env.BK_IAM_SAAS_HOST
 BK_IAM_API_PREFIX = env.BK_IAM_API_PREFIX
 # 权限中心 migrations 存储 app
 BK_IAM_MIGRATION_APP_NAME = "bksops_iam_migrations"
+
+# 系统管理员用户名配置
+BK_ADMIN_USERNAME = env.BK_ADMIN_USERNAME
 
 AUTH_LEGACY_RESOURCES = ["project", "common_flow", "flow", "mini_app", "periodic_task", "task"]
 
@@ -710,7 +713,8 @@ CELERY_ROUTES.update({"gcloud.clocked_task.tasks.clocked_task_start": PIPELINE_A
 BROKER_HEARTBEAT = 60
 BROKER_POOL_LIMIT = env.CELERY_BROKER_POOL_LIMIT
 
-SYSTEM_USE_API_ACCOUNT = "admin"
+# 系统 API 调用使用的默认管理员账号（支持通过环境变量 bkAdminUsername 配置）
+SYSTEM_USE_API_ACCOUNT = env.BK_ADMIN_USERNAME
 
 # VER settings
 ver_settings = importlib.import_module("config.sites.%s.ver_settings" % OPEN_VER)

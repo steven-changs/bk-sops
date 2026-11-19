@@ -49,7 +49,7 @@ def migrate_template_category(request):
         )
 
     project_id = params.get("project_id")
-    creator = params.get("creator", "admin")
+    creator = params.get("creator", settings.SYSTEM_USE_API_ACCOUNT)
 
     MIGRATE_LABEL_COLOR = "#b3eafa"
     category_mappings = {}
